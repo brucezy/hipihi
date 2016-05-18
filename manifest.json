@@ -1,0 +1,51 @@
+{
+  "manifest_version": 2,
+  "name": "HappiHi",
+  "short_name": "HappiHi",
+  "description": "extract content and publish in WordPress",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+
+  "background": {
+    "scripts": ["script/background/background.js", "script/background/secret.js", "script/background/xmlrpc.js", "script/background/utility.js"]
+  },
+    
+  "permissions": [
+    "tabs",
+    "background",
+	"contextMenus",
+	"activeTab",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+    
+  "browser_action": {
+    "default_icon": "img/icon_16.png",
+    "default_title": "Extract Content"
+  },
+
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.jpg",
+    "css/*.css",
+    "script/background/*.js",
+    "script/content/*.js",
+    "*.html"
+  ],
+  
+  "content_scripts": [ 
+      {
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["script/content/util.js", "script/content/message_handler.js", "script/content/dialogbox_handler.js", "script/content/elements_selection.js",
+          "script/content/elements_visualize.js", "script/content/dialogbox.js", "script/content/global_var.js"],
+        "css": ["css/styles.css"],
+        "run_at": "document_start"
+      }
+    ]
+}
