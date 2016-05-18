@@ -1,0 +1,113 @@
+/* The Modal (background) */
+.hipihi_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    /*overflow: auto;*/ /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+}
+
+/* The Modal dialog box */
+.hipihi_modal-dialog {
+    position: fixed; /* Stay in place */
+    /*z-index : 1;*/
+    left: 25%;
+    /*right: 25%*/
+    top: 10%
+    width: 50%; /* Full width */
+    margin: 30px auto;
+    color: #333;
+    background-color: #fff; /* Fallback color */
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+/* Modal Header */
+.hipihi_modal-header {
+    padding: 15px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e5e5e5;
+    background-color: #fff;
+    color: #333;
+    border-radius: 6px;
+}
+
+/* Modal Body */
+.hipihi_modal-body {
+    padding: 15px;
+    position: relative;
+    text-align: middle;
+    color: #333;
+    background-color: #fff;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e5e5e5;
+    font-size: 16px;
+}
+
+/* Modal Content */
+.hipihi_modal-content {
+    padding: 15px;
+    margin: auto;
+    padding: 0;
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: white;
+    color: #333;
+    background-color: #fff;
+    outline: 0;
+}
+
+/* Modal Footer */
+.hipihi_modal-footer {
+    padding: 15px;
+    text-align: right;
+    background-color: #fff;
+    color: #333;
+}
+
+.hipihi_modal-footer::before {
+    box-sizing: border-box;
+    display: table;
+    height: 0px;
+    width: 0px;
+    border-radius: 6px;
+}
+
+.hipihi_modal-footer::after {
+    box-sizing: border-box;
+}
+
+/* The Close Button */
+.hipihi_close {
+    color: #aaa;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hipihi_close:hover,
+.hipihi_close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
