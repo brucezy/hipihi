@@ -46,5 +46,5 @@ function showDraftPost() {
         newPaper = newPaper.split(key).join(value);
     });
     var postSection = document.getElementById("hipihi_draft_post");
-    postSection.value = newPaper;
+    postSection.value = postProcessHtmlContent(newPaper);
 }

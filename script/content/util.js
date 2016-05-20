@@ -125,6 +125,14 @@ function insertHiddenLayer() {
 }
 
 /**
+ * post process html content to remove <div> </div>, <p> </p> and <br>
+ */
+function postProcessHtmlContent(htmlContent) {
+//    return htmlContent.replace(/<div[\w\W]*>/gi, "").replace(/<\/div>/gi, "").replace("<br>", "").replace(/<p[\w\W]*>/gi, "").replace(/<\/p>/gi, "");
+    return htmlContent.replace(/<\/div>/gi, "").replace("<br>", "").replace(/<p>/gi, "\n").replace(/<\/p>/gi, "");
+}
+
+/**
  * partial encode special string '<', '>" in html content
  */
 function encodeHtmlContent(htmlContent) {
