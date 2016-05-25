@@ -138,3 +138,36 @@ function postProcessHtmlContent(htmlContent) {
 function encodeHtmlContent(htmlContent) {
     return htmlContent.split("<").join("&lt;").split(">").join("&gt;");
 }
+
+/**
+ * update hidden layer before upload image
+ */
+function updateHiddenLayer(dlgNode) {
+    //get unselected image element from dialog box
+    var unSelectedImagesSrc = [];
+    var imgInputElements = dlgNode.getElementsByClassName("hipihi_imageInput");
+    for(var i = 0; i < imgInputElements.length; i ++) {
+        if(imgInputElements[i].checked == false) {
+            unSelectedImagesSrc.push(imgInputElements[i].getAttribute("value"));
+        }
+    }
+
+    //find un-selected elements based on source
+    var contentNode = document.querySelector("div#extracted_content").childNodes[0];
+    var imgs = contentNode.getElementsByTagName("img");
+    var removeImageElementCandidates = [];
+    for(var i = 0; i < unSelectedImagesSrc.length; i++) {
+        for(var j = 0; j < imgs.length; j++) {
+            if(getSourceOfImage(imgs[j]) == unSelectedImagesSrc[i]) {
+                removeImageElementCandidates.push(imgs[j]);
+                break;
+            }
+        }
+    }
+
+    //remove unselected image elements from hidden layer
+    for(var i = 0; i < removeImageElementCandidates.length; i++) {
+//        contentNode.removeChild(removeImageElementCandidates[i]);
+        removeImageElementCandidates[i].parentElement.removeChild(removeImageElementCandidates[i]);
+    }
+}

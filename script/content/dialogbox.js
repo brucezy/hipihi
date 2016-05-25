@@ -29,13 +29,24 @@ var modalDlgHtml = "<div class='hipihi_modal-dialog'>" +
 /**
  * collect all user selected image element for upload
  */
-function getSelectedImgElements(parentElement) {
-    //suppose parentElement is a table
-    var selectedImages = new Array();
-    var rowElement = parentElement.querySelector("tbody").querySelectorAll("tr");
-    for(var i = 0; i < rowElement.length; i ++) {
-        if(rowElement[i].querySelector("td.selected").querySelector("input#imgCheckbox").checked)
-            selectedImages.push(rowElement[i].querySelector("td.thumbnail").attr("origin_src"));
+function getSelectedImgElements(dlgNode) {
+    //get all image input elements from dialog box
+    var selectedImages = [];
+    var imgInputElements = dlgNode.getElementsByClassName("hipihi_imageInput");
+
+    //get all image elements from hidden layer
+    var contentNode = document.querySelector("div#extracted_content").childNodes[0];
+    var imgs = contentNode.getElementsByTagName("img");
+
+    for(var i = 0; i < imgInputElements.length; i ++) {
+        if(imgInputElements[i].checked == true) {
+            for(var j = 0; j < imgs.length; j++) {
+                if(getSourceOfImage(imgs[j]) == imgInputElements[i].getAttribute("value")) {
+                    selectedImages.push(imgs[j]);
+                    break;
+                }
+            }
+        }
     }
     return selectedImages;
 }
@@ -59,6 +70,7 @@ function findImageElements(parentElement, imagesList) {
 
 function showModalDlg() {
     var selectedImages = [];
+    //selected element queried from hidden layer
     var selectedElement = document.querySelector("div#extracted_content").childNodes[0];
     findImageElements(selectedElement, selectedImages);
     console.log("number of image in selected area : " + selectedImages.length);
@@ -76,7 +88,7 @@ function showModalDlg() {
         dlgNode.setAttribute("style", "display : block;");
     }
     var uploadImageBtn = document.getElementById("uploadImgBtn");
-    uploadImageBtn.addEventListener("click", function(){imageUploadHandler(selectedImages, 0, imageSourceMap);});
+    uploadImageBtn.addEventListener("click", function(){imageUploadHandler(0);});
     var uploadPostBtn = document.getElementById("uploadPost");
     uploadPostBtn.addEventListener("click", function(){uploadPostHandler();});
 }
@@ -105,7 +117,7 @@ function insertImgUploadButton(parentElement) {
 function generateImgSelectDiv(imgElement, sequenceNum) {
     var imgDiv = document.createElement('div');
     var imageSrc = getSourceOfImage(imgElement);
-    var htmlStr = "<input type='checkbox' id='img" + sequenceNum + "' class='hipihi_imageInput'>" + imageSrc;
+    var htmlStr = "<input type='checkbox' id='img" + sequenceNum + "' class='hipihi_imageInput' value=" + imageSrc + " checked>" + imageSrc;
     imgDiv.innerHTML = htmlStr;
     return imgDiv;
 }

@@ -5,6 +5,7 @@ var altKeyPressed = false; // keeps track of whether alt was pressed in the last
 var hovered;
 var hoveredOriginalBoxShadows;
 var selectedImages = [];
+var imageSrcElementMap = new Map();
 var imageSourceMap = new Map();
 
 function getExtractEnableStatus() {
